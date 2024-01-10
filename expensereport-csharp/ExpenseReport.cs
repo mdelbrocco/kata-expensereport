@@ -6,7 +6,7 @@ namespace expensereport_csharp
 {
   public enum ExpenseType
   {
-    DINNER, BREAKFAST, CAR_RENTAL
+    DINNER, LUNCH, BREAKFAST, CAR_RENTAL
   }
 
   public class Expense
@@ -18,6 +18,7 @@ namespace expensereport_csharp
   public class ExpenseReport(/*TimeProvider timeProvider = null*/)
   {
     public const int LimitBreakfast = 1000;
+    public const int LimitLunch = 2000;
     public const int LimitDinner = 5000;
 
     //private readonly TimeProvider _timeProvider = timeProvider;
@@ -38,7 +39,7 @@ namespace expensereport_csharp
 
       foreach (Expense expense in expenses)
       {
-        if (expense.Type == ExpenseType.DINNER || expense.Type == ExpenseType.BREAKFAST)
+        if (expense.Type == ExpenseType.DINNER || expense.Type == ExpenseType.LUNCH || expense.Type == ExpenseType.BREAKFAST)
         {
           mealExpenses += expense.Amount;
         }
@@ -65,6 +66,9 @@ namespace expensereport_csharp
         case ExpenseType.BREAKFAST:
           expenseName = "Breakfast";
           break;
+        case ExpenseType.LUNCH:
+          expenseName = "Lunch";
+          break;
         case ExpenseType.CAR_RENTAL:
           expenseName = "Car Rental";
           break;
@@ -72,7 +76,8 @@ namespace expensereport_csharp
 
       var mealOverExpensesMarker =
           expense.Type == ExpenseType.DINNER && expense.Amount > LimitDinner ||
-          expense.Type == ExpenseType.BREAKFAST && expense.Amount > LimitBreakfast
+          expense.Type == ExpenseType.BREAKFAST && expense.Amount > LimitBreakfast ||
+          expense.Type == ExpenseType.LUNCH && expense.Amount > LimitLunch
               ? "X"
               : " ";
 
