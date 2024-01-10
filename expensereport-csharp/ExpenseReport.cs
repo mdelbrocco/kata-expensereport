@@ -17,6 +17,9 @@ namespace expensereport_csharp
 
   public class ExpenseReport(/*TimeProvider timeProvider = null*/)
   {
+    public const int LimitBreakfast = 1000;
+    public const int LimitDinner = 5000;
+
     //private readonly TimeProvider _timeProvider = timeProvider;
     public void PrintReport(List<Expense> expenses)
     {
@@ -68,8 +71,8 @@ namespace expensereport_csharp
       }
 
       var mealOverExpensesMarker =
-          expense.Type == ExpenseType.DINNER && expense.Amount > 5000 ||
-          expense.Type == ExpenseType.BREAKFAST && expense.Amount > 1000
+          expense.Type == ExpenseType.DINNER && expense.Amount > LimitDinner ||
+          expense.Type == ExpenseType.BREAKFAST && expense.Amount > LimitBreakfast
               ? "X"
               : " ";
 
