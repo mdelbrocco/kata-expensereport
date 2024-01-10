@@ -16,6 +16,8 @@ namespace Tests
     {
       var expense = new Expense() { Type = ExpenseType.BREAKFAST, Amount = 5 };
       var result = new ExpenseReport().BuildReportLineItem(expense);
+
+      result.ShouldBe("Breakfast\t5\t ");
     }
   }
 }

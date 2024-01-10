@@ -15,9 +15,9 @@ namespace expensereport_csharp
     public int Amount { get; set; }
   }
 
-  public class ExpenseReport(TimeProvider timeProvider)
+  public class ExpenseReport(/*TimeProvider timeProvider = null*/)
   {
-    private readonly TimeProvider _timeProvider = timeProvider;
+    //private readonly TimeProvider _timeProvider = timeProvider;
     public void PrintReport(List<Expense> expenses)
     {
       Console.WriteLine(BuildReport(expenses));
@@ -28,11 +28,10 @@ namespace expensereport_csharp
       int total = 0;
       int mealExpenses = 0;
 
-      var foo = _timeProvider.GetLocalNow();
+      //var foo = _timeProvider.GetLocalNow();
 
       var sb = new StringBuilder(); // or use something like TextWriter = Console.Out
       sb.AppendLine("Expenses " + DateTime.Now);
-      sb.AppendLine("Expenses " + foo);
 
       foreach (Expense expense in expenses)
       {

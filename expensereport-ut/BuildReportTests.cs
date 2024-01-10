@@ -1,5 +1,4 @@
 using expensereport_csharp;
-using Microsoft.Extensions.Time.Testing;
 using NUnit.Framework;
 using Shouldly;
 
@@ -12,7 +11,7 @@ namespace Tests
     [SetUp]
     public void Setup()
     {
-      expenseReport = new ExpenseReport(new FakeTimeProvider());
+      expenseReport = new ExpenseReport();
     }
 
     [Test]
@@ -54,12 +53,6 @@ namespace Tests
 
       result.ShouldContain("Meal Expenses: 30");
       result.ShouldContain("Total expenses: 530");
-    }
-
-    [Test]
-    public void TimestampIsStillGoodAfterSwappingToTimeProvider()
-    {
-      var result = expenseReport.BuildReport([new() { Type = ExpenseType.CAR_RENTAL, Amount = 500 }])
     }
   }
 }
